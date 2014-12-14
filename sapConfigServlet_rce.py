@@ -1,5 +1,6 @@
 # sapConfigServlet_rce.py
 # description: checks for SAP ConfigServlet Remote Unauthenticated Remote Code Execution Vulnerability
+# reference: http://erpscan.com/wp-content/uploads/2012/11/Breaking-SAP-Portal-HackerHalted-2012.pdf
 # author: @shipcod3
 
 import sys, urllib
